@@ -28,3 +28,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
 -- remaps ctrl+t to tmux-sessionizer
 vim.keymap.set("n", "<C-t>", "<cmd>tmux-sessionizer.sh<CR>")
+
+-- remaps ctrl+k and ctrl+j to cnext and cprev respectively
+vim.keymap.set("n", "<C-j>", ":cprev<CR>")
+vim.keymap.set("n", "<C-k>", ":cnext<CR>")
