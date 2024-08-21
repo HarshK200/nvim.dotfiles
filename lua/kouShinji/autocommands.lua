@@ -23,21 +23,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-
--- nvim will be in normal mode when entered a new buffer
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("stopinsert")
-	end,
-})
-
--- insures that when you type exit the neoterm buffer closes
-vim.api.nvim_create_autocmd("TermClose", {
-	pattern = "*",
-	callback = function()
-		if vim.bo.filetype == "neoterm" then
-			vim.cmd("bd!") -- Close only the Neoterm buffer
-		end
-	end,
-})
