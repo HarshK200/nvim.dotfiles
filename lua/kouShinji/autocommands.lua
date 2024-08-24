@@ -23,3 +23,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- to remove the highlight thingi
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("highlight Folded guifg=None guibg=None")
+  end,
+})
+
+
