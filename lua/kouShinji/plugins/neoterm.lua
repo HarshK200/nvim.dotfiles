@@ -10,10 +10,12 @@ return {
 
 		local neoterm = require("neoterm")
 
-        vim.keymap.set("n", "<C-y>", "<Esc>:NeotermToggle<CR>a", { noremap = true, silent = true })
-		vim.keymap.set("t", "<C-y>", ":NeotermToggle<CR>")
-        vim.keymap.set("i", "<C-y>", "<Esc>:NeotermToggle<CR>a", { noremap = true, silent = true })
-		vim.keymap.set("t", "<C-y>", "<C-\\><C-n>:NeotermToggle<CR>")
+		vim.keymap.set("n", "<M-n>", "<Esc>:NeotermToggle<CR>a", { noremap = true, silent = true })
+		vim.keymap.set("i", "<M-n>", "<Esc>:NeotermToggle<CR>a", { noremap = true, silent = true })
+		vim.keymap.set("v", "<M-n>", "<Esc>:NeotermToggle<CR>a", { noremap = true, silent = true })
+		-- vim.keymap.set("n", "<C-k>", "<C-\\><C-n><C-w>p<CR>a", { noremap = true, silent = true })
+		vim.keymap.set("t", "<M-n>", "<C-\\><C-n>:NeotermToggle<CR>", { noremap = true, silent = true })
+		vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>p", { noremap = true, silent = true })
 
 		-- Override global config on a specific open call
 		neoterm.open({ mode = "horizontal", noinsert = true })
@@ -26,4 +28,3 @@ return {
 		neoterm.exit()
 	end,
 }
-

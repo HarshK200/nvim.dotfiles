@@ -1,0 +1,16 @@
+{
+	"Cpp main file boilerplate code": {
+		"prefix": "mymain",
+		"body": [
+			"#include <iostream>",
+			"using std::cin;",
+			"using std::cout;",
+			"",
+			"int main() {",
+			"\t$0",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "just a basic cpp file template with main function"
+	}
+}

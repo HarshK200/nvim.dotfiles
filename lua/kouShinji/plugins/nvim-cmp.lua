@@ -14,12 +14,10 @@ return {
 		local cmp = require("cmp")
 
 		local luasnip = require("luasnip")
-
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
-
-		-- loading my custom snippets
-		require("luasnip.loaders.from_vscode").load({ paths = { "./snippets" } })
+		-- adds my custom snippets
+		require("luasnip.loaders.from_vscode").load({ paths = "./snippets" })
 
 		cmp.setup({
 			completion = {
@@ -30,10 +28,10 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-			--window = {
-			--completion = cmp.config.window.bordered(),
-			--documentation = cmp.config.window.bordered(),
-			--},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
 			mapping = cmp.mapping.preset.insert({
 
 				-- Keymaps for autocomplete
@@ -47,8 +45,8 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" }, -- for built-in nvim_lsp autocompletion
 				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "nvim_lsp" }, -- for built-in nvim_lsp autocompletion
 				{ name = "buffer" }, -- for text autocompletion in the current buffer
 				{ name = "path" }, -- for file path autocompletion
 			}),
