@@ -9,20 +9,20 @@ return {
 		require("Comment").setup({
 			--Add a space b/w comment and the line
 			padding = true,
-			--Whether the cursor should stay at its position
+			-- Whether the cursor should stay at its position
 			sticky = false,
 
 			--LHS of toggle mappings in NORMAL mode
 			toggler = {
 				--Line-comment toggle keymap
-				line = "cl",
+				line = "<leader>cl",
 				--Block-comment toggle keymap
-				block = "cm",
+				block = "<leader>cm",
 			},
 			---LHS of operator-pending mappings in NORMAL and VISUAL mode
 			opleader = {
 				-- Line-comment keymap
-				line = "cl",
+				line = "<leader>cl",
 				-- Block-comment keymap
 				block = "cm",
 			},
