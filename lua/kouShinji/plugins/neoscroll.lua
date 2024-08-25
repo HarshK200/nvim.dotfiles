@@ -6,8 +6,23 @@ return {
 			cursor_scrolls_alone = true,
 			respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
 			easing = "sine",
-            mappings = {}
+			mappings = {},
 		})
+
+		local cursor_scroll_modes = { "n", "v", "i" }
+		local cursor_scroll_keymap = {
+			["<ScrollWheelUp>"] = function()
+				neoscroll.scroll(-0.1, { move_cursor=false; duration = 100 })
+			end,
+			["<ScrollWheelDown>"] = function()
+				neoscroll.scroll(0.1, { move_cursor=false; duration = 100 })
+			end,
+		}
+		for key, func in pairs(cursor_scroll_keymap) do
+			vim.keymap.set(cursor_scroll_modes, key, func)
+		end
+
+		-- smooth scroll keymaps
 		local keymap = {
 			["<C-u>"] = function()
 				neoscroll.ctrl_u({ duration = 250 })

@@ -33,6 +33,7 @@ return {
 				async = false,
 				timeout_ms = 500,
 			})
+			vim.cmd([[ColorizerReloadAllBuffers]])
 		end)
 	end,
 }
