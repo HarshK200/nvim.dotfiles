@@ -14,7 +14,12 @@ return {
 		local keymap = vim.keymap -- for conciseness
 		vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 		vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-		vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+		vim.keymap.set(
+			"n",
+			"<leader>fc",
+			"<cmd>Telescope grep_string<cr>",
+			{ desc = "Find string under cursor in cwd" }
+		)
 		vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find currently open buffers" })
 
 		telescope.setup({
@@ -31,7 +36,7 @@ return {
 						["<C-j>"] = actions.move_selection_next, -- move to next result
 					},
 				},
-				file_ignore_patterns = { "node_modules", ".git" },
+				file_ignore_patterns = { "node_modules", ".git", ".next"},
 			},
 		})
 
