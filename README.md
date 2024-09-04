@@ -1,2 +1,3 @@
-# NOTE THE FILES HAVE BEEN MOVED TO https://github.com/HarshK200/dotfiles.git
+# NOTE THE FILES HAVE BEEN MOVED
 ### THIS ALSO HAS THE INSTALLATION STEPS
+https://github.com/HarshK200/dotfiles.git
