@@ -1,0 +1,2 @@
+# NOTE THE FILES HAVE BEEN MOVED TO https://github.com/HarshK200/dotfiles.git
+### THIS ALSO HAS THE INSTALLATION STEPS
