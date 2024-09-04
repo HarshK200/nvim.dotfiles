@@ -55,7 +55,7 @@ return {
 			},
 
 			-- autoinstall is set to true
-			automatic_installation = true,
+			auto_install = true,
 
 			handlers = {
 				function(server_name) -- default_handler

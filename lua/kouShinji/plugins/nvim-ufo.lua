@@ -2,6 +2,26 @@ return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = {
 		"kevinhwang91/promise-async",
+		{
+			"luukvbaal/statuscol.nvim",
+			opts = function()
+				local builtin = require("statuscol.builtin")
+				return {
+					setopt = true,
+					-- override the default list of segments with:
+					-- number-less fold indicator, then signs, then line number & separator
+					segments = {
+						{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+						{ text = { "%s" }, click = "v:lua.ScSa" },
+						{
+							text = { builtin.lnumfunc, " " },
+							condition = { true, builtin.not_empty },
+							click = "v:lua.ScLa",
+						},
+					},
+				}
+			end,
+		},
 	},
 	config = function()
 		vim.o.foldcolumn = "1" -- '0' is not bad
@@ -9,8 +29,7 @@ return {
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true
 		vim.cmd([[ set fillchars=foldopen:▾,foldclose:▸ ]])
-        vim.cmd([[ highlight Folded guifg=None guibg=None ]])
-
+		vim.cmd([[ highlight Folded guifg=None guibg=None ]])
 
 		-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 		vim.keymap.set("n", "zr", require("ufo").openAllFolds)
