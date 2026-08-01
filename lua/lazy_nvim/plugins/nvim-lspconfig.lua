@@ -21,6 +21,19 @@ return {
 				vim.lsp.buf.hover({ border = "rounded" })
 			end)
 
+			-- Custom Diagnostic signs
+			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+			vim.diagnostic.config({
+				signs = {
+					text = {
+						[vim.diagnostic.severity.HINT] = signs.Hint,
+						[vim.diagnostic.severity.INFO] = signs.Info,
+						[vim.diagnostic.severity.WARN] = signs.Warn,
+						[vim.diagnostic.severity.ERROR] = signs.Error,
+					},
+				},
+			})
+
 			-- custom lsp config for server
 			vim.lsp.config("lua_ls", {
 				settings = {

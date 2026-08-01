@@ -1,22 +1,34 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	config = function()
-		---@type nvim_tree.config
-		local config = {
-			sort = {
-				sorter = "case_sensitive",
-			},
-			view = {
-				width = 30,
+		require("nvim-tree").setup({
+			filters = {
+				dotfiles = false,
 			},
 			renderer = {
-				group_empty = true,
-			},
-			filters = {
-				dotfiles = true,
-			},
-		}
+				highlight_git = "name",
 
-		require("nvim-tree").setup(config)
+				icons = {
+					show = {
+						git = false,
+					},
+				},
+			},
+			diagnostics = {
+				enable = true,
+			},
+		})
+
+		local api = require("nvim-tree.api")
+
+		-- toggle explorer nvim tree
+		vim.keymap.set("n", "<leader>t", function()
+			api.tree.toggle({ focus = false })
+		end)
+
+		-- find file in explorer i.e. nvim tree
+		vim.keymap.set("n", "<leader>ft", function()
+			api.tree.find_file({ open = true, focus = true })
+		end)
 	end,
 }
