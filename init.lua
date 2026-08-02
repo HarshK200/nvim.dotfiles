@@ -1,4 +1,4 @@
-------------------------------  Lazy.Plugin  -------------------------------
+--------------------------------  Plugin  ----------------------------------
 require("lazy_nvim")
 
 ------------------------------    Keymaps    -------------------------------
@@ -14,6 +14,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Set leader
 vim.g.mapleader = " "
+
+-- remove ~ from empty line
+vim.opt.fillchars:append({ eob = " " })
 
 -- Sets line numbers and relativenumber
 vim.opt.number = true

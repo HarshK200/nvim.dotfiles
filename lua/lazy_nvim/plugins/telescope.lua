@@ -28,11 +28,6 @@ return {
 					hidden = true,
 				},
 			},
-
-			-- fzf native doesn't work for window
-			-- extensions = {
-			-- 	fzf = {},
-			-- },
 		})
 
 		-- set keymaps
