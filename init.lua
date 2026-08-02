@@ -19,6 +19,9 @@ vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Reserve sign column for git sign and etc
+vim.opt.signcolumn = "yes:1"
+
 -- Set word/line wrap to false
 vim.opt.wrap = false
 
