@@ -1,6 +1,33 @@
 local M = {
 	previous_cmd = nil,
+	terminal_buf = nil,
+	terminal_win = nil,
 }
+
+local function execute_task(cmd)
+	M.previous_cmd = cmd
+
+	local origin_win = vim.api.nvim_get_current_win()
+
+	-- Check if the terminal window is still open and valid
+	if M.terminal_win and vim.api.nvim_win_is_valid(M.terminal_win) then
+		-- Jump to the existing terminal window
+		vim.api.nvim_set_current_win(M.terminal_win)
+	else
+		-- Open a new vertical split and track its window ID
+		vim.cmd("vsplit")
+		M.terminal_win = vim.api.nvim_get_current_win()
+	end
+
+	-- Execute the terminal command
+	vim.cmd("terminal " .. cmd)
+	M.terminal_buf = vim.api.nvim_get_current_buf()
+
+	-- Jump back to your original window without moving your cursor
+	if vim.api.nvim_win_is_valid(origin_win) then
+		vim.api.nvim_set_current_win(origin_win)
+	end
+end
 
 function M.spawn_task()
 	-- Check if Telescope is installed at runtime
@@ -71,7 +98,8 @@ function M.spawn_task()
 					local selection = action_state.get_selected_entry()
 					if selection then
 						M.previous_cmd = selection.value.cmd
-						vim.cmd("vsplit | terminal " .. selection.value.cmd)
+						execute_task(selection.value.cmd)
+						-- vim.cmd("vsplit | terminal " .. selection.value.cmd)
 					else
 						vim.notify("WARN: no entry selected", vim.log.levels.WARN)
 					end
@@ -88,7 +116,7 @@ function M.run_previous_task()
 		return
 	end
 
-	vim.cmd("vsplit | terminal " .. M.previous_cmd)
+	execute_task(M.previous_cmd)
 end
 
 function M.setup(_)
