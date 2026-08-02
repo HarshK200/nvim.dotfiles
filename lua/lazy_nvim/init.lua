@@ -27,9 +27,16 @@ require("lazy").setup({
 		-- import your plugins
 		{ import = "lazy_nvim.plugins" },
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "habamax" } },
+
+	-- diable luarocks as i don't use any plugins that use luarocks *gets rid of that annoying warning too*
+	rocks = {
+		enabled = false,
+	},
+
 	-- automatically check for plugin updates
-	checker = { enabled = true },
+	checker = { enabled = false },
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
 })
