@@ -13,6 +13,9 @@ return {
 						git = false,
 					},
 				},
+				root_folder_label = function(root_cwd)
+                    return vim.fn.fnamemodify(root_cwd, ":t")
+                end,
 			},
 			diagnostics = {
 				enable = true,
