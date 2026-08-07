@@ -7,6 +7,11 @@ local M = {
 local function execute_task(cmd)
 	M.previous_cmd = cmd
 
+	-- Delete previous buffer if exists
+	if M.terminal_buf and vim.api.nvim_buf_is_valid(M.terminal_buf) then
+		vim.api.nvim_buf_delete(M.terminal_buf, { force = true, unload = true })
+	end
+
 	local origin_win = vim.api.nvim_get_current_win()
 
 	-- Check if the terminal window is still open and valid
