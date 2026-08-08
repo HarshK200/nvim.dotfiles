@@ -1,3 +1,8 @@
+-- NOTE: THIS IS EXPERIMENTAL FEATURE
+if vim.loader then
+	vim.loader.enable()
+end
+
 --------------------------------  Plugin  ----------------------------------
 require("lazy_nvim")
 

@@ -5,10 +5,6 @@ return {
 
 	-- use a release tag to download pre-built binaries
 	version = "1.*",
-	-- AND/OR build from source
-	-- build = 'cargo build --release',
-	-- If you use nix, you can build from source with:
-	-- build = 'nix run .#build-plugin',
 
 	---@module 'blink.cmp'
 	opts = {
