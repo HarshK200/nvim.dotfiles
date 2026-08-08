@@ -3,6 +3,7 @@ return {
 	config = function()
 		require("nvim-tree").setup({
 			filters = {
+				enable = false, -- disable file filters so all of the files appear in tree
 				dotfiles = false,
 			},
 			renderer = {
@@ -14,8 +15,8 @@ return {
 					},
 				},
 				root_folder_label = function(root_cwd)
-                    return vim.fn.fnamemodify(root_cwd, ":t")
-                end,
+					return vim.fn.fnamemodify(root_cwd, ":t")
+				end,
 			},
 			diagnostics = {
 				enable = true,
