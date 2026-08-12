@@ -14,8 +14,8 @@ local function execute_task(cmd)
 		-- Jump to the existing terminal window
 		vim.api.nvim_set_current_win(M.terminal_win)
 	else
-		-- Open a new vertical split and track its window ID
-		vim.cmd("vsplit")
+		-- Open a new horizontal split and track its window ID
+		vim.cmd("split")
 		M.terminal_win = vim.api.nvim_get_current_win()
 	end
 
