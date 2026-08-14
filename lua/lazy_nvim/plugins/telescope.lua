@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
-		"folke/todo-comments.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -20,12 +19,13 @@ return {
 						["<C-q>"] = actions.send_to_qflist + actions.open_qflist, -- send the telescope search results to quickfix list
 					},
 				},
-				file_ignore_patterns = { "node_modules", "next/" },
+				file_ignore_patterns = { "node_modules", "next/", ".git/*" },
 			},
 
 			pickers = {
 				find_files = {
 					hidden = true,
+					no_ignore = true,
 				},
 			},
 		})

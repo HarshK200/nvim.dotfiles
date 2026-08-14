@@ -4,6 +4,10 @@ return {
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
 	},
+	cmd = "Spawn",
+	keys = {
+		{ "<M-t>", "Run previous task" },
+	},
 	config = function()
 		require("personal_plugins.taskspawner").setup()
 	end,

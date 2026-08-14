@@ -1,8 +1,3 @@
--- NOTE: THIS IS EXPERIMENTAL FEATURE
-if vim.loader then
-	vim.loader.enable()
-end
-
 --------------------------------  Plugin  ----------------------------------
 require("lazy_nvim")
 
@@ -32,6 +27,9 @@ vim.opt.signcolumn = "yes:1"
 
 -- Set word/line wrap to false
 vim.opt.wrap = false
+
+-- Hides netrw banner
+vim.g.netrw_banner = 0
 
 -- search settings
 vim.opt.ignorecase = true -- ignore case when searching
@@ -73,3 +71,39 @@ vim.keymap.set("n", "to", ":tabonly<CR>", { silent = true })
 for i = 1, 9 do
 	vim.keymap.set("n", "t" .. i, ":tabn" .. i .. "<CR>")
 end
+
+vim.keymap.set("n", "-", ":Ex<CR>", { silent = true })
+
+------------------------------   Auto Commands  -------------------------------
+
+-- enables highlight when yanking/copying
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlights the text when yanked",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
+-- disable that annoying make new buffer in netrw keybind
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "netrw",
+	callback = function(args)
+		for _, map in ipairs(vim.api.nvim_buf_get_keymap(args.buf, "n")) do
+			-- check if keymap is set before deleting
+			if map.lhs == "t" then
+				vim.keymap.del("n", "t", { buffer = args.buf })
+				break
+			end
+		end
+	end,
+})
+
+-- removes the annoying sort-by keybind of netrw
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "netrw",
+	callback = function()
+		vim.keymap.set("n", "s", "<Nop>", { buffer = true })
+		vim.keymap.set("n", "<F1>", "<Nop>", { buffer = true })
+	end,
+})

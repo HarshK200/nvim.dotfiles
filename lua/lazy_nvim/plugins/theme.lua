@@ -1,5 +1,5 @@
 return {
-    "gmr458/cold.nvim",
+	"HarshK200/cold.nvim",
 	lazy = false,
 	priority = 1000,
 	init = function()
