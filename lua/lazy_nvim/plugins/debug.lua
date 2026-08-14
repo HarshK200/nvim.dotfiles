@@ -23,7 +23,7 @@ return {
 
 		-- setup debug adapters
 		local dap = require("dap")
-		dap.adapters.lldb = {
+		dap.adapters.codelldb = {
 			type = "executable",
 			command = "C:\\Program Files\\LLVM\\bin\\lldb-dap.exe",
 			args = {},
@@ -32,9 +32,9 @@ return {
 		-- keymaps
 		vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 		vim.keymap.set("n", "<F5>", dap.continue)
-		vim.keymap.set("n", "<C-F10>", dap.step_over)
-		vim.keymap.set("n", "<C-F11>", dap.step_into)
-		vim.keymap.set("n", "<C-F12>", dap.step_out)
+		vim.keymap.set("n", "<F10>", dap.step_over)
+		vim.keymap.set("n", "<F11>", dap.step_into)
+		vim.keymap.set("n", "<F12>", dap.step_out)
 
 		-- setup dapui
 		local dapui = require("dapui")
@@ -51,6 +51,31 @@ return {
 					run_last = "▶▶",
 					terminate = "",
 					disconnect = "",
+				},
+			},
+			layouts = {
+				{
+					elements = {
+						{ id = "scopes", size = 0.5 },
+						{ id = "breakpoints", size = 0.25 },
+						{ id = "stacks", size = 0.25 },
+					},
+					position = "left",
+					size = 40,
+				},
+				{
+					elements = {
+						{
+							id = "repl",
+							size = 0.75,
+						},
+						{
+							id = "console",
+							size = 0.25,
+						},
+					},
+					position = "bottom",
+					size = 20,
 				},
 			},
 		})
