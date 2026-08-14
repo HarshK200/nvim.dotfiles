@@ -6,7 +6,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				odin = { "odinfmt" },
-                json = { "perttier" },
+                json = { "prettier" },
 			},
 		})
 
