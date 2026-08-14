@@ -6,30 +6,8 @@
 
 - RUNNING TASKS:
 Just create a .vscode/launch.json file and write your tasks in its tasks field,
-the schema my personal taskspawn plugin follows is exactly the same as vscode
-
-e.g.
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/mfussenegger/dapconfig-schema/master/dapconfig-schema.json",
-  "version": "0.2.0",
-  "tasks": [
-    {
-      "label": "build-debug-win32-d3d11",
-      "cmd": "odin run ./build_scripts -collection:topdown_game=. -out:./build_scripts/build.exe -- --debug --d3d11"
-    },
-  ],
-  "configurations": [
-    {
-      "name": "debug-win32-d3d11",
-      "type": "lldb",
-      "request": "launch",
-      "program": "${workspaceFolder}/build/debug/main.exe",
-      "cwd": "${workspaceFolder}"
-    }
-  ]
-}
-```
+the schema my personal taskspawn plugin follows is exactly the same as vscode. 
+```**Example at the bottom**```
 
 - DEBUGGING:
 
@@ -53,6 +31,8 @@ NOTE: In the above the lldb is the name of the adapter and when writing the conf
 {
   "$schema": "https://raw.githubusercontent.com/mfussenegger/dapconfig-schema/master/dapconfig-schema.json",
   "version": "0.2.0",
+
+  // these are the tasks taskspawner reads
   "tasks": [
     {
       "label": "build-debug-win32-d3d11",
@@ -60,11 +40,11 @@ NOTE: In the above the lldb is the name of the adapter and when writing the conf
     },
   ],
 
-  // this is the file
+  // these are the debug configuration dap reads
   "configurations": [
     {
       "name": "debug-win32-d3d11",
-      "type": "lldb",     // <----------- this lldb should match with the dap.adapaters.lldb
+      "type": "lldb",     // <----------- this lldb should match with the dap.adapters.lldb
       "request": "launch",
       "program": "${workspaceFolder}/build/debug/main.exe",
       "cwd": "${workspaceFolder}"
