@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	-- lazy load on buffer read or new buffer/file open
-	event = { "BufReadPre", "BufNewFile" },
+	event = "LspAttach",
 	-- use a release tag to download pre-built binaries
 	version = "1.*",
 	opts = {

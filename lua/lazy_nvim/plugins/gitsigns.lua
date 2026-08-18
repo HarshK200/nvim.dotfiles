@@ -1,7 +1,7 @@
 return {
 	"lewis6991/gitsigns.nvim",
 	-- lazy load on buffer read or new buffer/file open
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	opts = {
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns

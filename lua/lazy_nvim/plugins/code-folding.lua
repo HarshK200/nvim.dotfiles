@@ -1,7 +1,7 @@
 return {
 	"kevinhwang91/nvim-ufo",
 	-- lazy load on buffer read or new buffer/file open
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
 		"kevinhwang91/promise-async",
 		{

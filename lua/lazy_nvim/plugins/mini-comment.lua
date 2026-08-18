@@ -1,7 +1,7 @@
 return {
 	"echasnovski/mini.comment",
     -- lazy load on buffer read
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	version = false,
 	config = function()
 		require("mini.comment").setup({
