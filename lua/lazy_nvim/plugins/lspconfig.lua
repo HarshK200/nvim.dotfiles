@@ -1,9 +1,13 @@
 return {
-	"neovim/nvim-lspconfig",
+	"mason-org/mason-lspconfig.nvim",
 	-- lazy load on buffer read or new buffer/file open
 	event = { "BufReadPre", "BufNewFile" },
+	opts = {
+		ensure_installed = { "lua_ls", "ols", "jsonls" },
+	},
 	dependencies = {
-		"mason-org/mason-lspconfig.nvim",
+		{ "mason-org/mason.nvim", opts = {} },
+		"neovim/nvim-lspconfig",
 	},
 	config = function()
 		-- jump to definition
@@ -38,27 +42,10 @@ return {
 			},
 		})
 
-		-- custom lsp config for server
-		vim.lsp.config("lua_ls", {
-			settings = {
-				Lua = {
-					runtime = {
-						version = "LuaJIT",
-					},
-					diagnostics = {
-						globals = { "vim" },
-					},
-					workspace = {
-						checkThirdParty = false,
-						library = vim.api.nvim_get_runtime_file("", true),
-					},
-					telemetry = {
-						enable = false,
-					},
-				},
-			},
-		})
-
+		-- NOTE: gotta manually enable lsp server, otherwise they won't work even if automatic_enable is true
+		-- Because automatic_enable doesn't work on neovim 0.12+ (at least that's what i've noticed)
 		vim.lsp.enable("lua_ls")
+		vim.lsp.enable("ols")
+		vim.lsp.enable("jsonls")
 	end,
 }

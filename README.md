@@ -9,6 +9,18 @@ Just create a .vscode/launch.json file and write your tasks in its tasks field,
 the schema my personal taskspawn plugin follows is exactly the same as vscode. 
 ```**Example at the bottom**```
 
+- LSP SETUP:
+In order to setup a new lsp server, just type `:Mason` and install whatever lsp you want
+then go into lua/lazy_nvim/plugins/lspconfig.lua file and there at the bottom call
+```lua
+-- NOTE: the lsp_name MUST MATCH nvim-lspconfig's lsp name NOT the Mason lsp package name
+-- You can find you lsp name in lspconfig docs by typeing `h lspconfig-all`
+vim.lsp.enable("lsp_name")
+```
+
+NOTE: you can add that lsp name to ensure_installed if you want that lsp_server to be
+installed automatically incase you uninstall it ever add it there0
+
 - DEBUGGING:
 
 Setting up debug adapter for your language,
