@@ -64,3 +64,15 @@ NOTE: In the above the lldb is the name of the adapter and when writing the conf
   ]
 }
 ```
+
+- vim Global autocomplete and intellsence
+The vim global has full autocomplete and intellesence while editing this nvim config since
+the file .luarc.json specifies the vim library path like so:
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "workspace.library": [
+    "C:/Users/Harsh/scoop/apps/neovim/current/share/nvim/runtime/lua" // <---- For Windows
+  ]
+}
+```
