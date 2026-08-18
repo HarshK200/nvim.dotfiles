@@ -1,7 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	-- lazy load on buffer read or new buffer/file open
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"mason-org/mason-lspconfig.nvim",
 	},

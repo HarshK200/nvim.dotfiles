@@ -1,7 +1,7 @@
 return {
 	"stevearc/conform.nvim",
 	-- lazy load on keymap
-	events = "LspAttach",
+	event = "LspAttach",
 	config = function()
 		require("conform").setup({
 			formatters_by_ft = {
