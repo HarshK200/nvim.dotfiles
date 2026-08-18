@@ -123,7 +123,8 @@ function M.run_previous_task()
 	execute_task(M.previous_cmd)
 end
 
-function M.setup(_)
+function M.setup()
+	-- create user commands
 	vim.api.nvim_create_user_command("Spawn", M.spawn_task, {})
 	vim.api.nvim_create_user_command("SpawnPrevious", M.run_previous_task, {})
 end

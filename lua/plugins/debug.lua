@@ -1,10 +1,7 @@
 return {
 	"mfussenegger/nvim-dap",
-    -- lazy load on keybind press
-	keys = {
-		{ "<leader>b", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint" },
-		{ "<F5>", "<cmd>DapContinue<cr>", desc = "Toggle breakpoint" },
-	},
+	-- lazy load on key press
+	keys = { "<leader>b", "<F5>" },
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio", -- required by dap-ui
