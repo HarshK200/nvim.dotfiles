@@ -125,7 +125,7 @@ end
 
 function M.setup(_)
 	vim.api.nvim_create_user_command("Spawn", M.spawn_task, {})
-	vim.keymap.set("n", "<M-t>", M.run_previous_task)
+	vim.api.nvim_create_user_command("SpawnPrevious", M.run_previous_task, {})
 end
 
 return M

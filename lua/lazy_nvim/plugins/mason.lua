@@ -1,4 +1,4 @@
 return {
 	"mason-org/mason.nvim",
-	opts = {},
+	opts = {}, -- NOTE: DON'T remove the opts = {} otherwise mason.nvim won't work
 }

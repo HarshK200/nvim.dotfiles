@@ -1,6 +1,6 @@
 return {
 	"folke/trouble.nvim",
-	opts = {}, -- for default options, refer to the configuration section for custom setup.
+    -- lazy load when command Trouble is used
 	cmd = "Trouble",
 	keys = {
 		{

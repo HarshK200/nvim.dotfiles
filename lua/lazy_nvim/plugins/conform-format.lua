@@ -1,6 +1,8 @@
 return {
 	"stevearc/conform.nvim",
-	opts = {},
+    -- TODO: change keymap load instead
+    -- lazy load on buffer read
+    event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("conform").setup({
 			formatters_by_ft = {
@@ -8,7 +10,7 @@ return {
 				odin = { "odinfmt" },
                 json = { "prettier" },
 			},
-		})
+        })
 
 		vim.keymap.set("n", "<leader>ff", function()
 			require("conform").format()

@@ -1,5 +1,11 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	-- lazy load on key press
+	keys = {
+		{ "<C-f>", "<cmd>Telescope find_files<cr>", desc = "Fuzzy find files in cwd" },
+		{ "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Find string in cwd" },
+		{ "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find string under cursor in cwd" },
+	},
 	branch = "master",
 	dependencies = {
 		"nvim-lua/plenary.nvim",

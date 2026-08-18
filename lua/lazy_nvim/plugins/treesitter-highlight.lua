@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	lazy = false, -- treesitter doesn't support lazy loading
+	-- lazy load on buffer read and new file
+	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter").setup({
