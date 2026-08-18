@@ -11,7 +11,7 @@ the schema my personal taskspawn plugin follows is exactly the same as vscode.
 
 - LSP SETUP:
 In order to setup a new lsp server, just type `:Mason` and install whatever lsp you want
-then go into lua/lazy_nvim/plugins/lspconfig.lua file and there at the bottom call
+then go into lua/plugins/lspconfig.lua file and there at the bottom call
 ```lua
 -- NOTE: the lsp_name MUST MATCH nvim-lspconfig's lsp name NOT the Mason lsp package name
 -- You can find you lsp name in lspconfig docs by typeing `h lspconfig-all`
