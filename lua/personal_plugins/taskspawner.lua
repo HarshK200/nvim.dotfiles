@@ -1,12 +1,10 @@
 local M = {
-	previous_cmd = nil,
+	previous_task = nil,
 	terminal_buf = nil,
 	terminal_win = nil,
 }
 
 local function execute_task(cmd)
-	M.previous_cmd = cmd
-
 	local origin_win = vim.api.nvim_get_current_win()
 
 	-- Check if the terminal window is still open and valid
@@ -102,7 +100,7 @@ function M.spawn_task()
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
 					if selection then
-						M.previous_cmd = selection.value.cmd
+						M.previous_task = selection.value
 						execute_task(selection.value.cmd)
 					else
 						vim.notify("WARN: no entry selected", vim.log.levels.WARN)
@@ -115,12 +113,49 @@ function M.spawn_task()
 end
 
 function M.run_previous_task()
-	if not M.previous_cmd then
+	if not M.previous_task then
 		vim.notify("WARN: no previous command", vim.log.levels.WARN)
 		return
 	end
 
-	execute_task(M.previous_cmd)
+	-- get launch.json filepath
+	local json_file = vim.fs.joinpath(vim.fn.getcwd(), ".vscode", "launch.json")
+
+	-- read launch.json file
+	if vim.fn.filereadable(json_file) == 0 then
+		vim.notify("ERROR: .vscode/launch.json not found", vim.log.levels.ERROR)
+		return
+	end
+	local file = io.open(json_file, "r")
+	if not file then
+		vim.notify("ERROR: Failed to read .vscode/launch.json", vim.log.levels.ERROR)
+		return
+	end
+	local content = file:read("*a")
+	file:close()
+
+	-- decode json file
+	local success, launch = pcall(vim.json.decode, content)
+	if not success or type(launch) ~= "table" then
+		vim.notify("ERROR: Failed to parse .vscode/launch.json", vim.log.levels.ERROR)
+		return
+	end
+
+	local cmd
+	for _, task in ipairs(launch["tasks"]) do
+		if task.label == M.previous_task.label then
+			cmd = task.cmd
+		end
+	end
+	if not cmd then
+		vim.notify(
+			"Error: previous command " .. M.previous_task.label .. " is not in launch.json",
+			vim.log.levels.ERROR
+		)
+		return
+	end
+
+	execute_task(cmd)
 end
 
 function M.setup()
