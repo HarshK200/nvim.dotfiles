@@ -27,9 +27,8 @@ local function execute_task(task)
 	if M.terminal_buf and vim.api.nvim_buf_is_valid(M.terminal_buf) then
 		vim.api.nvim_buf_delete(M.terminal_buf, { force = true, unload = true })
 	end
-	-- Check if the terminal window is still open and valid
+	-- Delete previous window if exists
 	if M.terminal_win and vim.api.nvim_win_is_valid(M.terminal_win) then
-		-- close the already open window
 		vim.api.nvim_win_close(M.terminal_win, true)
 	end
 
