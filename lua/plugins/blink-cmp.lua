@@ -5,13 +5,18 @@ return {
 	-- use a release tag to download pre-built binaries
 	version = "1.*",
 	opts = {
-		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-		-- 'super-tab' for mappings similar to vscode (tab to accept)
-		-- 'enter' for enter to accept
-		-- 'none' for no mappings
-		--
 		-- See :h blink-cmp-config-keymap for defining your own keymap
-		keymap = { preset = "default" },
+		keymap = {
+			-- disable default mappings
+			preset = "none",
+
+			-- control completion window, select next, previous and accept
+			["<C-p>"] = { "select_prev" },
+			["<C-n>"] = { "select_next" },
+			["<C-y>"] = { "select_and_accept" },
+
+			["<Tab>"] = { "show" },
+		},
 
 		appearance = {
 			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
