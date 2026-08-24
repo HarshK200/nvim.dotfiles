@@ -8,14 +8,7 @@ return {
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
 			-- disable default mappings
-			preset = "none",
-
-			-- control completion window, select next, previous and accept
-			["<C-p>"] = { "select_prev" },
-			["<C-n>"] = { "select_next" },
-			["<C-y>"] = { "select_and_accept" },
-
-			["<Tab>"] = { "show" },
+			preset = "default",
 		},
 
 		appearance = {

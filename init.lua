@@ -42,7 +42,6 @@ require("lazy").setup({
 	},
 })
 
-
 ------------------------------    Keymaps    -------------------------------
 -- copy to system keyboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -50,7 +49,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- keymaps to shift highlighted line up/down (shift + k) (shift + j)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 
 ------------------------------   Set Config  -------------------------------
 -- Set leader
@@ -115,7 +113,6 @@ end
 
 vim.keymap.set("n", "-", ":Ex<CR>", { silent = true })
 
-
 ------------------------------   Auto Commands  -------------------------------
 -- enables highlight when yanking/copying
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -148,3 +145,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<F1>", "<Nop>", { buffer = true })
 	end,
 })
+
+vim.api.nvim_create_user_command("T", "vsplit | terminal nu", { bang = false })
