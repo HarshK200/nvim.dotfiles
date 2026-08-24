@@ -8,6 +8,7 @@ return {
 				lua = { "stylua" },
 				odin = { "odinfmt" },
 				json = { "prettier" },
+                cpp = { "clang-format" },
 			},
 		})
 
