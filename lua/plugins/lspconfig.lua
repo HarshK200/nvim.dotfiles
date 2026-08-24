@@ -47,5 +47,6 @@ return {
 		vim.lsp.enable("lua_ls")
 		vim.lsp.enable("ols")
 		vim.lsp.enable("jsonls")
+        vim.lsp.enable("clangd")
 	end,
 }

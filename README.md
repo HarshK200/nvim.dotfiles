@@ -19,7 +19,7 @@ vim.lsp.enable("lsp_name")
 ```
 
 NOTE: you can add that lsp name to ensure_installed if you want that lsp_server to be
-installed automatically incase you uninstall it ever add it there0
+installed automatically incase you uninstall it ever add it there
 
 - DEBUGGING:
 
