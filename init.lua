@@ -146,8 +146,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- command to open terminal in current window
+-- command to open terminal in current window, with set keymap ctrl+t
 vim.api.nvim_create_user_command("T", "terminal nu", { bang = false })
+vim.keymap.set("n", "<C-t>", "<cmd>T<CR>")
 
 -- command to delete all buffers that are not open in window
 vim.api.nvim_create_user_command("BufCloseBg", function()
