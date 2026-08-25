@@ -146,4 +146,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- command to open terminal in current window
 vim.api.nvim_create_user_command("T", "terminal nu", { bang = false })
+
+-- command to delete all buffers that are not open in window
+vim.api.nvim_create_user_command("BufCloseBG", function()
+	local buffers = vim.api.nvim_list_bufs()
+
+	for _, buf in ipairs(buffers) do
+		-- Check if buffer is valid and loaded
+		if vim.api.nvim_buf_is_loaded(buf) then
+			-- check if there is a window associated with this valid buffer
+			if vim.fn.bufwinid(buf) == -1 then
+				-- Use pcall to prevent crashing if a buffer has unsaved changes
+				pcall(vim.api.nvim_buf_delete, buf, {})
+			end
+		end
+	end
+end, { desc = "Close all hidden buffers" })
