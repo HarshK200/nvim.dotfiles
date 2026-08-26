@@ -100,6 +100,9 @@ vim.opt.splitbelow = true -- split horizontally to bottom
 -- changing the stupid fu*king sql filetype plugin omin_key from ctrl+c to ctrl+j
 vim.g.ftplugin_sql_omni_key = "<C-j>"
 
+-- removing the vim's legacy TODO highlight group
+vim.api.nvim_set_hl(0, "todo", { link = "Comment" })
+
 -- The swap file and backup file stuff like the . file it creates and shit annoying stuff turning it off
 vim.opt.swapfile = false
 vim.opt.backup = false

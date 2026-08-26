@@ -21,7 +21,14 @@ return {
 						["<C-q>"] = actions.send_to_qflist + actions.open_qflist, -- send the telescope search results to quickfix list
 					},
 				},
-				file_ignore_patterns = { "node_modules", "next/", "%.git[/\\]" }, -- NOTE: ignore uses lua regex matching NOT file names
+				file_ignore_patterns = {
+					"node_modules",
+					"next/",
+					"%.git[/\\]",
+					"%.vs[/\\][^/\\]*%.slnx", -- for visual studio slnx project stuff
+					"build[/\\]debug",
+					"build[/\\]release",
+				}, -- NOTE: ignore uses lua regex matching NOT file names
 			},
 
 			pickers = {
