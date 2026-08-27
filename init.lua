@@ -50,12 +50,19 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+vim.keymap.set("n", "<C-n>", function()
+	vim.cmd("Lexplore")
+end, { desc = "Toggle netrw" })
+
 ------------------------------   Set Config  -------------------------------
 -- Set leader
 vim.g.mapleader = " "
 
--- remove ~ from empty line
-vim.opt.fillchars:append({ eob = " " })
+-- Hides netrw banner
+vim.g.netrw_banner = 0
+
+-- set netrw window width
+vim.g.netrw_winsize = 18
 
 -- Sets line numbers and relativenumber
 vim.opt.number = true
@@ -66,9 +73,6 @@ vim.opt.signcolumn = "yes:1"
 
 -- Set word/line wrap to false
 vim.opt.wrap = false
-
--- Hides netrw banner
-vim.g.netrw_banner = 0
 
 -- search settings
 vim.opt.ignorecase = true -- ignore case when searching
