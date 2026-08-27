@@ -130,12 +130,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- disable that annoying make new buffer in netrw keybind
+-- netrw customization
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
+	group = vim.api.nvim_create_augroup("NetrwAutoFileTree", { clear = true }),
 	callback = function(args)
+		-- remove annoying netrw keymaps
 		for _, map in ipairs(vim.api.nvim_buf_get_keymap(args.buf, "n")) do
-			-- check if keymap is set before deleting
 			if map.lhs == "t" then
 				vim.keymap.del("n", "t", { buffer = args.buf })
 				break
