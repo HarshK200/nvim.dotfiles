@@ -104,6 +104,10 @@ vim.opt.splitbelow = true -- split horizontally to bottom
 -- changing the stupid fu*king sql filetype plugin omin_key from ctrl+c to ctrl+j
 vim.g.ftplugin_sql_omni_key = "<C-j>"
 
+-- disable those automaticlly written annoying duplicate file with ~ symbol at the end
+vim.g.backup = false
+vim.g.writebackup = false
+
 -- removing the vim's legacy TODO highlight group
 vim.api.nvim_set_hl(0, "todo", { link = "Comment" })
 
@@ -154,6 +158,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+------------------------------   User Commands  -------------------------------
 -- command to open terminal in current window, with set keymap ctrl+t
 vim.api.nvim_create_user_command("T", "terminal nu", { bang = false })
 vim.keymap.set("n", "<C-t>", "<cmd>T<CR>")
@@ -174,3 +179,9 @@ vim.api.nvim_create_user_command("BufCloseBg", function()
 		end
 	end
 end, { desc = "Close all hidden buffers" })
+
+vim.api.nvim_create_user_command(
+	"WinEx",
+	"silent !explorer .",
+	{ bang = false, desc = "Open windows explorer in the current folder" }
+)
