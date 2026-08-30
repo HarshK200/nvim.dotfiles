@@ -4,6 +4,16 @@
 - The plugins are kept to the minimal for maximum startup speed and minimal lag
 - Lazy.nvim package manager used
 
+## IMPORTANT NOTE! ON WINDOWS 11 (NOT SURE ABOUT 10)
+```
+You MUST add nvim.exe, alacritty.exe (my terminal), nvim config directory and nvim install directory
+to Exclusion on Windows Defender/Security.
+
+otherwise you have +2 or even +5 seconds to the startup time
+cause windows defender makes file reads slow for some reason?? So your extensions will load super slow
+even with lazy loading
+```
+
 - RUNNING TASKS:
 Just create a .vscode/launch.json file and write your tasks in its tasks field,
 the schema my personal taskspawn plugin follows is exactly the same as vscode. 
