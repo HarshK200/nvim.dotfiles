@@ -1,8 +1,9 @@
-# My MAIN neovim config (Uses Neovim v0.12)
+# My MAIN neovim config (Uses Neovim v0.12+)
 
-- This is my main neovim config which i use on windows and will most porbably use on linux
+- This is my main neovim (Neovim v0.12.5) config which i use on windows and will most porbably use on linux
 - The plugins are kept to the minimal for maximum startup speed and minimal lag
 - Lazy.nvim package manager used
+
 
 ## IMPORTANT NOTE! ON WINDOWS 11 (NOT SURE ABOUT 10)
 ```
@@ -14,12 +15,26 @@ cause windows defender makes file reads slow for some reason?? So your extension
 even with lazy loading
 ```
 
-- RUNNING TASKS:
+
+## Things you MUST have installed before using this config
+
+- **A Patched font for unicode glyph's, font i'm using is Hack Nerd Font: https://www.nerdfonts.com/font-downloads**
+```sh
+-> scoop install cmake ffmpeg fzf mpv ninja ripgrep tree-sitter fd 7zip neovim nu
+
+```
+- **Also make sure you have [SPECIFICALLY python_3.12], any nodejs and any cl.exe i.e. visual studio complier for C and
+C++ as they are used by tree-sitter to compile syntax parsers for most languages**
+
+
+## RUNNING TASKS:
+
 Just create a .vscode/launch.json file and write your tasks in its tasks field,
 the schema my personal taskspawn plugin follows is exactly the same as vscode. 
 ```**Example at the bottom**```
 
-- LSP SETUP:
+
+## LSP SETUP:
 In order to setup a new lsp server, just type `:Mason` and install whatever lsp you want
 then go into lua/plugins/lspconfig.lua file and there at the bottom call
 ```lua
@@ -31,7 +46,8 @@ vim.lsp.enable("lsp_name")
 NOTE: you can add that lsp name to ensure_installed if you want that lsp_server to be
 installed automatically incase you uninstall it ever add it there
 
-- DEBUGGING:
+
+## DEBUGGING:
 
 Setting up debug adapter for your language,
 just create a new entery in the dap.adapters.you_adapter_name table like so:
