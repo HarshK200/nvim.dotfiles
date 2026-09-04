@@ -43,8 +43,7 @@ then go into lua/plugins/lspconfig.lua file and there at the bottom call
 vim.lsp.enable("lsp_name")
 ```
 
-NOTE: you can add that lsp name to ensure_installed if you want that lsp_server to be
-installed automatically incase you uninstall it ever add it there
+NOTE: ensure_installed opts does not work in MASON or nvim-lsp config, you HAVE TO install lsp via `:Mason` command manually.
 
 
 ## DEBUGGING:

@@ -2,9 +2,7 @@ return {
 	"mason-org/mason-lspconfig.nvim",
 	-- lazy load on buffer read or new buffer/file open
 	event = { "BufReadPre", "BufNewFile" },
-	opts = {
-		ensure_installed = { "lua_ls", "ols", "jsonls" },
-	},
+	opts = {},
 	dependencies = {
 		{ "mason-org/mason.nvim", opts = {} },
 		"neovim/nvim-lspconfig",
