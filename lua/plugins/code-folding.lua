@@ -51,7 +51,7 @@ return {
 		-- just setting up ufo with lsp
 		require("ufo").setup({
 			provider_selector = function()
-				return { "indent", "lsp" }
+				return { "lsp" }
 			end,
 		})
 
