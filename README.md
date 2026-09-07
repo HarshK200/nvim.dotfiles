@@ -15,6 +15,11 @@ cause windows defender makes file reads slow for some reason?? So your extension
 even with lazy loading
 ```
 
+## IMPORTANT NOTE! FOR THEME
+```
+I use cold.nvim theme it has a ColdCompile command since it caches the theme file once compiled for faster loads.
+So Whenever you change a config option make sure you call the :ColdCompile command otherwise the theme changes they WILL NOT REFLECT.
+```
 
 ## Things you MUST have installed before using this config
 

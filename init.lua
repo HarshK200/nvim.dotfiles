@@ -96,6 +96,9 @@ vim.opt.expandtab = true
 
 -- gives 4 lines of padding to cursor when scrolling off-page
 vim.opt.scrolloff = 4
+-- enable th cursorline
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "both"
 
 -- split windows default side
 vim.opt.splitright = true -- split vertical to right side
