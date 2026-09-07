@@ -25,7 +25,7 @@ return {
 
 		-- setup debug adapters
 		local dap = require("dap")
-		dap.adapters.codelldb = {
+		dap.adapters.lldb = {
 			type = "executable",
 			command = "C:\\Program Files\\LLVM\\bin\\lldb-dap.exe",
 			args = {},
@@ -34,9 +34,9 @@ return {
 		-- keymaps
 		vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 		vim.keymap.set("n", "<F5>", dap.continue)
-		vim.keymap.set("n", "<F10>", dap.step_over)
-		vim.keymap.set("n", "<F11>", dap.step_into)
-		vim.keymap.set("n", "<F12>", dap.step_out)
+		vim.keymap.set("n", "<F6>", dap.step_over)
+		vim.keymap.set("n", "<F4>", dap.step_into)
+		vim.keymap.set("n", "<F7>", dap.step_out)
 
 		-- setup dapui
 		local dapui = require("dapui")
