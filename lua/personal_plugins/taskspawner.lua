@@ -1,9 +1,17 @@
+---@class ShellOptions
+---@field executable string
+---@field args string[]|nil
+
+---@class Options
+---@field shell ShellOptions
+
 ---@class PresentationOptions
 ---@field focus boolean
 
 ---@class Task
 ---@field label string
 ---@field command string
+---@field options Options|nil
 ---@field presentation PresentationOptions
 
 ---@class Tasks
@@ -23,21 +31,21 @@ local M = {
 local function execute_task(task)
 	local origin_win = vim.api.nvim_get_current_win()
 
-	-- Delete previous buffer if exists
-	if M.terminal_buf and vim.api.nvim_buf_is_valid(M.terminal_buf) then
-		vim.api.nvim_buf_delete(M.terminal_buf, { force = true, unload = true })
-	end
 	-- Delete previous window if exists
 	if M.terminal_win and vim.api.nvim_win_is_valid(M.terminal_win) then
 		vim.api.nvim_win_close(M.terminal_win, true)
 	end
+	-- Delete previous buffer if exists
+	if M.terminal_buf and vim.api.nvim_buf_is_valid(M.terminal_buf) then
+		vim.api.nvim_buf_delete(M.terminal_buf, { force = true, unload = true })
+	end
 
 	-- create a new buffer for jobstart to work in
 	M.terminal_buf = vim.api.nvim_create_buf(false, true)
-	-- Open a new horizontal split and track its window ID
+
+	-- open a floating window with rounded border on the top-right
 	local width = math.floor(vim.o.columns / 2.5)
 	local height = math.floor(vim.o.lines / 3)
-
 	M.terminal_win = vim.api.nvim_open_win(M.terminal_buf, true, {
 		relative = "editor",
 		width = width,
@@ -50,12 +58,35 @@ local function execute_task(task)
 	})
 
 	-- Execute the terminal command
-	vim.fn.jobstart(task.command, {
-		term = true,
-		cwd = vim.fn.getcwd(),
-		width = width,
-		height = height, -- NOTE: the terminal doesn't really care about the height it covers the whole window
-	})
+	if task.options and task.options.shell then
+		-- make the command list to be run
+		local cmd = { task.options.shell.executable }
+
+		-- add the arguments to the command list
+		if task.options.shell.args then
+			vim.list_extend(cmd, task.options.shell.args)
+		end
+
+		-- add the tasks build/run command to the cmd list
+		table.insert(cmd, task.command)
+
+		vim.fn.jobstart(cmd, {
+			term = true,
+			cwd = vim.fn.getcwd(),
+			width = width,
+			height = height, -- NOTE: the terminal doesn't really care about the height it covers the whole window
+		})
+	else
+		-- just use the nvim's default call to run a command
+		vim.fn.jobstart(task.command, {
+			term = true,
+			cwd = vim.fn.getcwd(),
+			width = width,
+			height = height, -- NOTE: the terminal doesn't really care about the height it covers the whole window
+		})
+	end
+
+	-- Makes sure the cursor is at the bottom so terminal output scrolls with it
 	vim.api.nvim_win_set_cursor(M.terminal_win, {
 		vim.api.nvim_buf_line_count(M.terminal_buf),
 		0,

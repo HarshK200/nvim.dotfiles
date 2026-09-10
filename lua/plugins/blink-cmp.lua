@@ -28,6 +28,17 @@ return {
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 		fuzzy = { implementation = "prefer_rust_with_warning" },
+
+		-- don't attach in prompt/scratch buffers — fixes phantom buffer bug
+		-- caused by blink completing inside Telescope's prompt/results buffers
+		enabled = function()
+			local bt = vim.bo.buftype
+			local ft = vim.bo.filetype
+			if bt == "prompt" or bt == "nofile" or ft == "TelescopePrompt" or ft == "TelescopeResults" then
+				return false
+			end
+			return true
+		end,
 	},
 	opts_extend = { "sources.default" },
 }
