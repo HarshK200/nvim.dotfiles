@@ -3,8 +3,7 @@ return {
 	-- lazy load on key press
 	keys = { "<leader>b", "<F5>" },
 	dependencies = {
-		"rcarriga/nvim-dap-ui",
-		"nvim-neotest/nvim-nio", -- required by dap-ui
+		"igorlfs/nvim-dap-view",
 	},
 	config = function()
 		-- set custom looking breakpoints, Requires Nerd Font
@@ -32,58 +31,23 @@ return {
 		}
 
 		-- keymaps
-		vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
-		vim.keymap.set("n", "<F5>", dap.continue)
-		vim.keymap.set("n", "<F6>", dap.step_over)
-		vim.keymap.set("n", "<F4>", dap.step_into)
-		vim.keymap.set("n", "<F7>", dap.step_out)
-
-		-- setup dapui
-		local dapui = require("dapui")
-		dapui.setup({
-			icons = { expanded = "", collapsed = "", current_frame = "" },
-			controls = {
-				icons = {
-					pause = "",
-					play = "",
-					step_into = "󰿄",
-					step_over = "",
-					step_out = "",
-					step_back = "",
-					run_last = "▶▶",
-					terminate = "",
-					disconnect = "",
-				},
-			},
-			layouts = {
-				{
-					elements = {
-						{ id = "scopes", size = 0.5 },
-						{ id = "breakpoints", size = 0.25 },
-						{ id = "stacks", size = 0.25 },
-					},
-					position = "left",
-					size = 40,
-				},
-				{
-					elements = {
-						{
-							id = "repl",
-							size = 0.45,
-						},
-						{
-							id = "console",
-							size = 0.55,
-						},
-					},
-					position = "bottom",
-					size = 20,
-				},
-			},
-		})
-		-- automatically opens/close the UI when the debugger starts
-		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		vim.keymap.set("n", "<leader>b", function()
+			dap.toggle_breakpoint()
+		end)
+		vim.keymap.set("n", "<F5>", function()
+			dap.continue()
+		end)
+		vim.keymap.set("n", "<F9>", function()
+			dap.step_out()
+		end)
+		vim.keymap.set("n", "<F10>", function()
+			dap.step_over()
+		end)
+		vim.keymap.set("n", "<F11>", function()
+			dap.step_into()
+		end)
+		vim.keymap.set("n", "<F4>", function()
+			dap.terminate()
+		end)
 	end,
 }
