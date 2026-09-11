@@ -4,7 +4,7 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	-- lazy loaded on key press
-	keys = { "<C-e>", "<C-h>", "<C-i>", "<C-o>", "<C-p>" },
+	keys = { "<leader>a" ,"<C-e>", "<C-h>", "<C-i>", "<C-o>", "<C-p>" },
 	config = function()
 		local mark = require("harpoon.mark")
 		local ui = require("harpoon.ui")
