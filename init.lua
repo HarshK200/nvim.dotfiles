@@ -64,9 +64,9 @@ vim.g.netrw_banner = 0
 -- set netrw window width
 vim.g.netrw_winsize = 18
 
--- Sets line numbers and relativenumber
+-- Sets line numbers and relative line numbers
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- Reserve sign column for git sign and etc
 vim.opt.signcolumn = "yes:1"
