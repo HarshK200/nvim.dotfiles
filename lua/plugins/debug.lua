@@ -3,6 +3,7 @@ return {
 	-- lazy load on key press
 	keys = { "<leader>b", "<F5>" },
 	dependencies = {
+		{ "mason-org/mason.nvim", opts = {} },
 		"igorlfs/nvim-dap-view",
 	},
 	config = function()
@@ -24,10 +25,17 @@ return {
 
 		-- setup debug adapters
 		local dap = require("dap")
+		local mason_registry = require("mason-registry")
+
+		local codelldb_path = mason_registry.get_package("codelldb"):get_install_path()
+			.. "/extension/adapter/codelldb.exe"
 		dap.adapters.lldb = {
-			type = "executable",
-			command = "C:\\Program Files\\LLVM\\bin\\lldb-dap.exe",
-			args = {},
+			type = "server",
+			port = "${port}",
+			executable = {
+				command = codelldb_path,
+				args = { "--port", "${port}" },
+			},
 		}
 
 		-- keymaps
@@ -50,7 +58,7 @@ return {
 			dap.terminate()
 		end)
 
-        -- setup nvim dap view
+		-- setup nvim dap view
 		local dapview = require("dap-view")
 		dap.listeners.after.event_initialized["dap-view"] = function()
 			dapview.open()
