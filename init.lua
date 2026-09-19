@@ -42,17 +42,41 @@ require("lazy").setup({
 	},
 })
 
+------------------------------ Env-Variables -------------------------------
+vim.env.CONFIG = vim.fn.stdpath("config")
+vim.env.DESKTOP = "C:\\Users\\Harsh\\Desktop"
+vim.env.CPPGAME = "C:\\Users\\Harsh\\Desktop\\personal_dev\\cpp_game"
+
 ------------------------------    Keymaps    -------------------------------
 -- copy to system keyboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+
+-- bind ctrl+shift+v to paste from system keyboard
+vim.keymap.set("i", "<C-S-v>", function()
+	vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
+end)
+
+-- keymap to delete the selected word into the void register and paste from the yank register
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- keymaps to shift highlighted line up/down (shift + k) (shift + j)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- toggle netrw side view pannel
 vim.keymap.set("n", "<C-n>", function()
 	vim.cmd("Lexplore")
 end, { desc = "Toggle netrw" })
+
+-- bind explorer to - key
+vim.keymap.set("n", "-", ":Ex<CR>", { silent = true })
+
+-- remapping tabs to t1, t2, t3 and so on...
+vim.keymap.set("n", "tn", ":tab split<CR>", { silent = true })
+vim.keymap.set("n", "to", ":tabonly<CR>", { silent = true })
+for i = 1, 9 do
+	vim.keymap.set("n", "t" .. i, ":tabn" .. i .. "<CR>")
+end
 
 ------------------------------   Set Config  -------------------------------
 -- Set leader
@@ -118,15 +142,6 @@ vim.api.nvim_set_hl(0, "todo", { link = "Comment" })
 vim.opt.swapfile = false
 vim.opt.backup = false
 
--- remapping tabs to t1, t2, t3 and so on...
-vim.keymap.set("n", "tn", ":tab split<CR>", { silent = true })
-vim.keymap.set("n", "to", ":tabonly<CR>", { silent = true })
-for i = 1, 9 do
-	vim.keymap.set("n", "t" .. i, ":tabn" .. i .. "<CR>")
-end
-
-vim.keymap.set("n", "-", ":Ex<CR>", { silent = true })
-
 ------------------------------   Auto Commands  -------------------------------
 -- enables highlight when yanking/copying
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -183,8 +198,12 @@ vim.api.nvim_create_user_command("BufCloseBg", function()
 	end
 end, { desc = "Close all hidden buffers" })
 
-vim.api.nvim_create_user_command(
-	"WinEx",
-	"silent !explorer .",
-	{ bang = false, desc = "Open windows explorer in the current folder" }
-)
+-- open windows explorer in the current folder
+vim.api.nvim_create_user_command("WinEx", "silent !explorer .", { bang = false })
+
+------------------------------  EXPEREMENTING with Neovide  -------------------------------
+if vim.g.neovide then
+	vim.g.neovide_progress_bar_enabled = false
+	vim.g.neovide_cursor_animation_length = 0.0
+	vim.o.guifont = "Hack Nerd Font Mono:h12"
+end
