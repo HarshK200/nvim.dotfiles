@@ -4,8 +4,7 @@ return {
 	keys = { "<leader>b", "<F5>" },
 	dependencies = {
 		{ "mason-org/mason.nvim", opts = {} },
-		"rcarriga/nvim-dap-ui",
-		"nvim-neotest/nvim-nio",
+		"igorlfs/nvim-dap-view",
 	},
 	config = function()
 		-- set custom looking breakpoints, Requires Nerd Font
@@ -28,6 +27,7 @@ return {
 		local dap = require("dap")
 		local mason_registry = require("mason-registry")
 
+		-- c/c++ codelldb
 		local codelldb_path = mason_registry.get_package("codelldb"):get_install_path()
 			.. "/extension/adapter/codelldb.exe"
 		dap.adapters.lldb = {
@@ -39,7 +39,7 @@ return {
 			},
 		}
 
-		-- keymaps
+		-- nvim-dap keymaps
 		vim.keymap.set("n", "<leader>b", function()
 			dap.toggle_breakpoint()
 		end)
@@ -60,42 +60,9 @@ return {
 		end)
 
 		-- setup nvim dap view
-        local dapui = require("dapui")
-		dapui.setup({
-			icons = { expanded = "", collapsed = "", current_frame = "" },
-			controls = {
-				icons = {
-					pause = "",
-					play = "",
-					step_into = "󰿄",
-					step_over = "",
-					step_out = "",
-					step_back = "",
-					run_last = "▶▶",
-					terminate = "",
-					disconnect = "",
-				},
-			},
-		})
-		-- Change breakpoint icons NOTE: make sure you have nerd font insalled
-		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
-		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
-		local breakpoint_icons = {
-			Breakpoint = "●",
-			BreakpointCondition = "",
-			BreakpointRejected = "⊘",
-			LogPoint = "◆",
-			Stopped = "",
-		}
-		for type, icon in pairs(breakpoint_icons) do
-			local tp = "Dap" .. type
-			local hl = (type == "Stopped") and "DapStop" or "DapBreak"
-			vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-		end
-
-		-- INFO: automatically opens/close the UI when the debugger starts
-		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		local dapview = require("dap-view")
+		vim.keymap.set("n", "<leader>dv", function()
+			dapview.toggle()
+		end)
 	end,
 }

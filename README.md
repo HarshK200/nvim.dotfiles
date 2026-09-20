@@ -53,17 +53,25 @@ NOTE: ensure_installed opts does not work in MASON or nvim-lsp config, you HAVE 
 
 ## DEBUGGING:
 
-Setting up debug adapter for your language,
-just create a new entery in the dap.adapters.you_adapter_name table like so:
+Setting up debug adapter for your language, install debug adpater via :Mason first, then just
+create a new entery in the dap.adapters.you_adapter_name table like so:
 
 ```lua
--- setup debug adapters
-local dap = require("dap")
-dap.adapters.lldb = {
-    type = "executable",
-    command = "C:\\Program Files\\LLVM\\bin\\lldb-dap.exe",
-    args = {},
-}
+    -- setup debug adapters
+    local dap = require("dap")
+    local mason_registry = require("mason-registry")
+
+    -- c/c++ codelldb
+    local codelldb_path = mason_registry.get_package("codelldb"):get_install_path()
+        .. "/extension/adapter/codelldb.exe"
+    dap.adapters.lldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+            command = codelldb_path,
+            args = { "--port", "${port}" },
+        },
+    }
 ```
 
 NOTE: In the above the lldb is the name of the adapter and when writing the configuration file i.e.
