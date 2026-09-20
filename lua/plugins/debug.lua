@@ -61,6 +61,33 @@ return {
 
 		-- setup nvim dap view
 		local dapview = require("dap-view")
+		dapview.setup({
+
+			-- the top bar for the dap-view window config
+			winbar = {
+				show = true,
+				show_keymap_hints = false,
+				sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+				default_section = "console",
+				-- have the play, step_into, step_out, etc.. button controls
+				controls = {
+					enabled = true,
+					position = "right",
+				},
+			},
+
+			-- the dap-view window config
+			windows = {
+				size = 0.45,
+				position = "right",
+			},
+
+			auto_toggle = true,
+			-- opens the a new tab when debugging
+			follow_tab = true,
+		})
+
+		-- nvim-dap-view keymaps
 		vim.keymap.set("n", "<leader>dv", function()
 			dapview.toggle()
 		end)
