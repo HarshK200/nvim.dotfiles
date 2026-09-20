@@ -83,8 +83,8 @@ return {
 			},
 
 			auto_toggle = true,
-			-- opens the a new tab when debugging
-			follow_tab = true,
+			-- follow if you open a new tab opens
+			follow_tab = false,
 		})
 
 		-- nvim-dap-view keymaps
