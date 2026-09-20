@@ -4,7 +4,8 @@ return {
 	keys = { "<leader>b", "<F5>" },
 	dependencies = {
 		{ "mason-org/mason.nvim", opts = {} },
-		"igorlfs/nvim-dap-view",
+		"rcarriga/nvim-dap-ui",
+		"nvim-neotest/nvim-nio",
 	},
 	config = function()
 		-- set custom looking breakpoints, Requires Nerd Font
@@ -59,15 +60,42 @@ return {
 		end)
 
 		-- setup nvim dap view
-		local dapview = require("dap-view")
-		dap.listeners.after.event_initialized["dap-view"] = function()
-			dapview.open()
+        local dapui = require("dapui")
+		dapui.setup({
+			icons = { expanded = "", collapsed = "", current_frame = "" },
+			controls = {
+				icons = {
+					pause = "",
+					play = "",
+					step_into = "󰿄",
+					step_over = "",
+					step_out = "",
+					step_back = "",
+					run_last = "▶▶",
+					terminate = "",
+					disconnect = "",
+				},
+			},
+		})
+		-- Change breakpoint icons NOTE: make sure you have nerd font insalled
+		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
+		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
+		local breakpoint_icons = {
+			Breakpoint = "●",
+			BreakpointCondition = "",
+			BreakpointRejected = "⊘",
+			LogPoint = "◆",
+			Stopped = "",
+		}
+		for type, icon in pairs(breakpoint_icons) do
+			local tp = "Dap" .. type
+			local hl = (type == "Stopped") and "DapStop" or "DapBreak"
+			vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
 		end
-		dap.listeners.before.event_terminated["dap-view"] = function()
-			dapview.close()
-		end
-		dap.listeners.before.event_exited["dap-view"] = function()
-			dapview.close()
-		end
+
+		-- INFO: automatically opens/close the UI when the debugger starts
+		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+		dap.listeners.before.event_exited["dapui_config"] = dapui.close
 	end,
 }
