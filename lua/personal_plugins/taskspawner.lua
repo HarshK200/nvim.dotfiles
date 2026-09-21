@@ -44,14 +44,14 @@ local function execute_task(task)
 	M.terminal_buf = vim.api.nvim_create_buf(false, true)
 
 	-- open a floating window with rounded border on the top-right
-	local width = math.floor(vim.o.columns / 2.5)
-	local height = math.floor(vim.o.lines / 3)
+	local width = math.floor(vim.o.columns / 3)
+	local height = math.floor(vim.o.lines / 4)
 	M.terminal_win = vim.api.nvim_open_win(M.terminal_buf, true, {
 		relative = "editor",
 		width = width,
 		height = height,
-		row = 0,
-		col = vim.o.columns - width - 1,
+		row = vim.o.lines,
+		col = 0,
 		border = "rounded",
 		title = " " .. task.label .. " ",
 		title_pos = "left",
